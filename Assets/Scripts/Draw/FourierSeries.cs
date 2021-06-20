@@ -10,6 +10,12 @@ public static class FourierSeries
     private static List<double> _offset = new List<double>();// of start angle
     private static int _count = 0;// of circles
 
+    /// <summary>
+    /// Add vector
+    /// </summary>
+    /// <param name="speed"></param>
+    /// <param name="radius"></param>
+    /// <param name="offset"></param>
     public static void Add(double speed, double radius, double offset)
     {
         _speed.Add(speed);
@@ -32,11 +38,14 @@ public static class FourierSeries
     }
 
     /// <summary>
-    /// 
+    /// Exchange vectors
     /// </summary>
     /// <param name="id">0 <= id < length - 1</param>
     public static void Exchange(int id)
     {
+        if (id < 0 || _count - 2 < id)
+            return;
+
         double temp = _speed[id];
         _speed[id] = _speed[id + 1];
         _speed[id + 1] = temp;
@@ -47,6 +56,10 @@ public static class FourierSeries
         _offset[id] = _offset[id + 1];
         _offset[id + 1] = temp;
     }
+    /// <summary>
+    /// Add vector
+    /// </summary>
+    /// <param name="id"></param>
     public static void Remove(int id)
     {
         if (_count > 0)

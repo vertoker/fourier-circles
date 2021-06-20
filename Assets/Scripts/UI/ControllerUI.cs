@@ -159,7 +159,7 @@ public class ControllerUI : MonoBehaviour
 
     private void UpdateLength()
     {
-        _content_rect.sizeDelta = new Vector2(_content_rect.sizeDelta.x, 200 * length + 100);
+        _content_rect.sizeDelta = new Vector2(_content_rect.sizeDelta.x, PANEL_SIZE * length + PANEL_SIZE / 2);
     }
     private void UpdateGroup(int i, int index)
     {
