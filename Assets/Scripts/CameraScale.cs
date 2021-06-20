@@ -3,34 +3,23 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class CameraScale : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+public class CameraScale : MonoBehaviour, IPointerDownHandler, IDragHandler
 {
-    public Transform tr;
-    public Camera cam;
-    public RectTransform view;
-    private Vector2 startPoint;
-    private Vector3 origPos;
-
-    public void Start()
-    {
-        view.sizeDelta = new Vector2(view.sizeDelta.x, 540f / cam.aspect);
-    }
+    [SerializeField] private Transform tr;
+    [SerializeField] private Camera cam;
+    private Vector2 _start_point;
+    private Vector3 _orig_pos;
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        startPoint = eventData.pointerCurrentRaycast.screenPosition;
-        origPos = tr.position;
+        _start_point = eventData.pointerCurrentRaycast.screenPosition;
+        _orig_pos = tr.position;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector3 offset = eventData.pointerCurrentRaycast.screenPosition - startPoint;
-        tr.position = origPos - offset / Mathf.Abs(100f - cam.orthographicSize * 2f);
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-
+        Vector3 offset = eventData.pointerCurrentRaycast.screenPosition - _start_point;
+        tr.position = _orig_pos - offset / Mathf.Abs(100f - cam.orthographicSize * 2f);
     }
 
     public void ScaleDown()
